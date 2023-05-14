@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import LoadCurrencies from './components/LoadCurrencies';
 import './App.css';
 

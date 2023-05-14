@@ -1,14 +1,37 @@
-import { createStore, createEffect } from 'effector';
+import { createStore, createEffect, restore } from 'effector';
 
-export interface ICurrency {
-  start_date: string;
-  end_date: string;
-  source: string;
-  quotes: object;
+// export interface ICurrency {
+//   start_date: string;
+//   end_date: string;
+//   source: string;
+//   quotes: IQuotes;
+// }
+
+// export interface IQuotes {
+//   RUBAED: ICur;
+//   RUBCNY: ICur;
+//   RUBEUR: ICur;
+//   RUBUSD: ICur;
+// }
+
+// export interface ICur {
+//   change: number;
+//   change_pct: number;
+//   end_rate: number;
+//   start_rate: number;
+// }
+
+export interface IConvert {
+  date?: string;
+  // historical: boolean;
+  // info: object;
+  // query: object;
+  result?: number;
+  // success: boolean;
 }
 
-export const fetchCurrenciesFx = createEffect<void, ICurrency[], Error>(async (): Promise<ICurrency[]> => {
-  const url = 'https://api.apilayer.com/currency_data/change?start_date=2023-05-14&end_date=2023-05-14&source=RUB&currencies=AED';
+export const fetchCurrenciesFx = createEffect<void, IConvert[], Error>(async (): Promise<IConvert[]> => {
+  const url = 'https://api.apilayer.com/exchangerates_data/convert?to=RUB&from=EUR&amount=1';
   const requestOptions = {
     method: 'GET',
     headers: {
@@ -21,4 +44,9 @@ export const fetchCurrenciesFx = createEffect<void, ICurrency[], Error>(async ()
   return response.json();
 });
 
-export const $currency = createStore<ICurrency[]>([]).on(fetchCurrenciesFx.doneData, (_, currency) => currency);
+export const $fetchError = restore<Error>(fetchCurrenciesFx.failData, null);
+export const $currency = createStore<IConvert[]>([]).on(fetchCurrenciesFx.doneData, (_, currency) => currency);
+
+fetchCurrenciesFx.done.watch(({ params, result }) => {
+  console.log(result?.date);
+});

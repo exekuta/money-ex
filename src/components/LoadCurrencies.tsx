@@ -1,26 +1,27 @@
 import { useEffect } from 'react';
 import { useStore } from 'effector-react';
-import { $currency, fetchCurrenciesFx } from '../services/api';
+import { $currency, IConvert, fetchCurrenciesFx } from '../services/api';
 
 const LoadCurrencies = () => {
   const currency = useStore($currency);
-  console.log(currency);
+  console.log(currency.date);
   
   useEffect(() => {
     fetchCurrenciesFx();
   }, []);
 
-  const currencyItems = currency.map((currency) => (
-    <div>
-      <div>{currency.source}</div>
-      <div>{currency.start_date}</div>
-      <div>{currency.end_date}</div>
-    </div>
-  ));
+  // const currencyItems = currency?.map((value, index) => (
+  //   <div key={index}>
+  //     <div>{value.date}</div>
+  //     <div>{value.result}</div>
+  //   </div>
+  // ));
+  // console.log(currencyItems);
 
   return (
     <div>
-      {currencyItems}
+      <div>{currency.date}</div>
+      <div>{currency.result}</div>
     </div>
   );
 };
