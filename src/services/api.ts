@@ -1,32 +1,5 @@
 import { createStore, createEffect, restore } from 'effector';
-
-export interface ICurrency {
-  base?: string;
-  date?: string;
-  rates?: IRates;
-}
-
-export interface IRates {
-  [x: string]: any;
-  RUB?: number;
-  AED?: number;
-  CNY?: number;
-  EUR?: number;
-  USD?: number;
-}
-
-export interface IConvert {
-  date?: string;
-  result?: number;
-  query?: {
-    from?: string;
-    to?: string;
-    amount: number; 
-  };
-  info?: {
-    rate?: number;
-  };
-}
+import { ICurrency, IConvert } from '../types/common';
 
 export const fetchCurrenciesFx = createEffect<string, ICurrency[], Error>(async (BASE_CUR): Promise<ICurrency[]> => {
   const url = `https://api.exchangerate.host/latest?symbols=RUB,AED,CNY,EUR,USD&base=${BASE_CUR}`;

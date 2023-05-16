@@ -1,25 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
-import {
-  $currency,
-  ICurrency,
-  IRates,
-  fetchCurrenciesFx,
-} from '../services/api';
+import { $currency, fetchCurrenciesFx } from '../services/api';
 import Spinner from '../assets/Spinner/spinner';
-
-export interface IOption {
-  value: string;
-  label: string;
-}
-
-const options: IOption[] = [
-  { value: 'option1', label: 'RUB' },
-  { value: 'option2', label: 'AED' },
-  { value: 'option3', label: 'CNY' },
-  { value: 'option4', label: 'EUR' },
-  { value: 'option5', label: 'USD' },
-];
+import { IOption, options, ICurrency, IRates } from '../types/common';
 
 const LoadCurrencies = () => {
   const [selectedOption, setSelectedOption] = useState<IOption | null>(null);
