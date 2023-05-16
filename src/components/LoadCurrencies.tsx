@@ -1,50 +1,63 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
 import {
   $currency,
-  IConvert,
+  ICurrency,
   IRates,
   fetchCurrenciesFx,
 } from '../services/api';
 import Spinner from '../assets/Spinner/spinner';
 
+export interface IOption {
+  value: string;
+  label: string;
+}
+
+const options: IOption[] = [
+  { value: 'option1', label: 'RUB' },
+  { value: 'option2', label: 'AED' },
+  { value: 'option3', label: 'CNY' },
+  { value: 'option4', label: 'EUR' },
+  { value: 'option5', label: 'USD' },
+];
+
 const LoadCurrencies = () => {
-  const currency = useStore($currency) as IConvert;
+  const [selectedOption, setSelectedOption] = useState<IOption | null>(null);
+
+  const currency = useStore($currency) as ICurrency;
   const rates = currency.rates as IRates;
   const isLoading = useStore(fetchCurrenciesFx.pending);
   const spinner = isLoading ? <Spinner /> : null;
 
-  // console.log(rates);
-
-  // const ratesValues = Object.values(rates).map((value) => (1 / value).toFixed(2));
-  // const exchangeRates = ratesValues.map((value, index) => (
-  //   <div key={index}>
-  //     <div>{value}</div>
-  //   </div>
-  // ));
-
-  const exchangeRates = Object.keys(rates).map((key) => (
+  const exchangeRates = Object.keys(rates || {}).map((key) => (
     <div key={key}>
-      <p>1 {key} = {(1 / (rates[key])).toFixed(2)} {currency.base}</p>
+      <p>
+        1 {key} = {(1 / rates[key]).toFixed(2)} {currency.base}
+      </p>
     </div>
   ));
 
   const handleRefresh = () => {
-    fetchCurrenciesFx();
+    fetchCurrenciesFx(selectedOption?.label ?? 'RUB');
   };
 
-  const handleChange = () => {
-    
+  const handleOptionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedValue = event.target.value;
+    const selected = options.find((option) => option.value === selectedValue);
+    setSelectedOption(selected || null);
+    fetchCurrenciesFx(selected?.label ?? 'RUB');
   };
 
   useEffect(() => {
-    fetchCurrenciesFx();
+    fetchCurrenciesFx('RUB');
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {fetchCurrenciesFx()}, 60000)
+    const interval = setInterval(() => {
+      fetchCurrenciesFx(selectedOption?.label ?? 'RUB');
+    }, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [selectedOption?.label]);
 
   return (
     <div>
@@ -52,13 +65,21 @@ const LoadCurrencies = () => {
       {!isLoading ? (
         <div>
           <div>
-            <h2>BASE CURRENCY: {currency.base}</h2>
-          </div>
-          <button onClick={handleChange}>CHANGE BASE CURRENCY</button>
-          <div>
             <h2>DATE: {currency.date}</h2>
           </div>
-          {/* <div>{exchangeRates}</div> */}
+          <div>
+            <span>SELECT BASE CURRENCY: </span>
+            <select
+              value={selectedOption?.value || ''}
+              onChange={handleOptionChange}
+            >
+              {options.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>{exchangeRates}</div>
           <button onClick={handleRefresh}>REFRESH EXCHANGE RATES</button>
         </div>

@@ -1,7 +1,13 @@
 import React from 'react';
+import ConvertCurrencies from '../../components/ConvertCurrencies';
 
 const Convert = () => {
-  return <div>Convert</div>;
+  return (
+    <div>
+      <h2>Convert your currency:</h2>
+      <ConvertCurrencies />
+    </div>
+  );
 };
 
 export default Convert;
