@@ -1,5 +1,7 @@
 import { createStore, createEffect, restore } from 'effector';
-import { ICurrency, IConvert } from '../types/common';
+import { ICurrency, IConvert, IConvertParams } from '../types/common';
+
+
 
 export const fetchCurrenciesFx = createEffect<string, ICurrency[], Error>(async (BASE_CUR): Promise<ICurrency[]> => {
   const url = `https://api.exchangerate.host/latest?symbols=RUB,AED,CNY,EUR,USD&base=${BASE_CUR}`;
@@ -12,8 +14,8 @@ export const fetchCurrenciesFx = createEffect<string, ICurrency[], Error>(async 
   return data;
 });
 
-export const fetchСonvertCurrenciesFx = createEffect<void, IConvert[], Error>(async (): Promise<IConvert[]> => {
-  const url = `https://api.exchangerate.host/convert?from=RUB&to=USD&amount=1000`;
+export const fetchСonvertCurrenciesFx = createEffect<IConvertParams, IConvert[], Error>(async ({ CUR_FROM, CUR_TO, CUR_AMOUNT }): Promise<IConvert[]> => {
+  const url = `https://api.exchangerate.host/convert?from=${CUR_FROM}&to=${CUR_TO}&amount=${CUR_AMOUNT}`;
   const requestOptions = {
     method: 'GET',
   };

@@ -26,6 +26,12 @@ export interface IConvert {
   };
 }
 
+export interface IConvertParams {
+  CUR_FROM: string;
+  CUR_TO: string;
+  CUR_AMOUNT: string;
+}
+
 export interface IOption {
   value: string;
   label: string;
