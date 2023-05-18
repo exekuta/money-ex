@@ -4,7 +4,6 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding-top: 10px; */
 `
 
 export const BaseCurrencyContainer = styled.div`
@@ -47,7 +46,7 @@ export const CardItem = styled.div`
   background-color: white;
   border-radius: 10px;
   border: none;
-  color: grey;
+  color: black;
   padding: 5px;
   width: 18vw;
   box-shadow: 0 14px 28px rgb(0 0 0 / 25%), 0 10px 10px rgb(0 0 0 / 22%);
@@ -55,12 +54,12 @@ export const CardItem = styled.div`
     width: 23vw;
   }
   @media (max-width: 1000px) {
-    width: 32vw;
+    width: 28vw;
   }
-  @media (max-width: 800px) {
-    width: 40vw;
+  @media (max-width: 750px) {
+    width: 27vw;
   }
   @media (max-width: 500px) {
-    width: 80vw;
+    width: 26vw;
   }
 `

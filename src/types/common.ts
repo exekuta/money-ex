@@ -36,15 +36,16 @@ export interface IConvertParams {
 export interface IOption {
   value: string;
   label: string;
+  fullname: string;
 }
 
 export const options: IOption[] = [
-  { value: 'option1', label: 'RUB' },
-  { value: 'option2', label: 'AED' },
-  { value: 'option3', label: 'CNY' },
-  { value: 'option4', label: 'EUR' },
-  { value: 'option5', label: 'USD' },
-  { value: 'option6', label: 'GBP' },
+  { value: 'option1', label: 'RUB', fullname: '(Российский Рубль)' },
+  { value: 'option2', label: 'AED', fullname: '(Дирхам ОАЭ)' },
+  { value: 'option3', label: 'CNY', fullname: '(Китайский юань)' },
+  { value: 'option4', label: 'EUR', fullname: '(Евро)' },
+  { value: 'option5', label: 'USD', fullname: '(Доллар США)' },
+  { value: 'option6', label: 'GBP', fullname: '(Фунт стерлингов)' },
 ];
 
 // export const options: IOption[] = [

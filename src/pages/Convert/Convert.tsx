@@ -1,12 +1,12 @@
-import React from 'react';
 import ConvertCurrencies from '../../components/ConvertCurrencies/ConvertCurrencies';
+import * as S from './Convert.style';
 
 const Convert = () => {
   return (
-    <div>
-      <h2>Convert your currency:</h2>
+    <S.Container>
+      <S.MainText>Convert your currency:</S.MainText>
       <ConvertCurrencies />
-    </div>
+    </S.Container>
   );
 };
 

@@ -12,6 +12,7 @@ export const Container = styled.div`
 
 export const MainText = styled.h2`
   color: #24457b;
+  margin: 0 30px 0 15px;
 `;
 
 export const List = styled.ul`

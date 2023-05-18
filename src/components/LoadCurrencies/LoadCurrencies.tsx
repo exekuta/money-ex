@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
-import { $currency, fetchCurrenciesFx } from '../../services/api';
-import Spinner from '../../assets/Spinner/spinner';
+import { $currency, fetchCurrenciesFx } from '../../services/api'
 import { IOption, options, ICurrency, IRates } from '../../types/common';
 import { Box, Button, Typography } from '@mui/material';
+import Spinner from '../../assets/Spinner/spinner';
 import * as S from './LoadCurrencies.style';
 
 const LoadCurrencies = () => {
@@ -14,9 +14,12 @@ const LoadCurrencies = () => {
   const isLoading = useStore(fetchCurrenciesFx.pending);
   const spinner = isLoading ? <Spinner /> : null;
 
+  console.log(currency);
+  console.log(rates);
+
   const exchangeRates = Object.keys(rates || {}).map((key) => (
       <S.CardItem key={key}>
-        <Typography>1 {key}</Typography>
+        <Typography>1 {key} </Typography>
         <Typography variant="h4"> = </Typography>
         <Typography>{(1 / rates[key]).toFixed(2)} {currency.base}</Typography>
       </S.CardItem>
@@ -45,7 +48,7 @@ const LoadCurrencies = () => {
   }, [selectedOption?.label]);
 
   return (
-    <S.Container>
+    <>
       {spinner}
       {!isLoading ? (
         <S.Container>
@@ -60,7 +63,7 @@ const LoadCurrencies = () => {
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.label}
+                  {option.label} {option.fullname}
                 </option>
               ))}
             </S.HalfItemSelect>
@@ -71,7 +74,7 @@ const LoadCurrencies = () => {
           </Button>
         </S.Container>
       ) : null}
-    </S.Container>
+    </>
   );
 };
 
