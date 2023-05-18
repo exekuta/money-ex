@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
-import { $currency, fetchCurrenciesFx } from '../services/api';
-import Spinner from '../assets/Spinner/spinner';
-import { IOption, options, ICurrency, IRates } from '../types/common';
+import { $currency, fetchCurrenciesFx } from '../../services/api';
+import Spinner from '../../assets/Spinner/spinner';
+import { IOption, options, ICurrency, IRates } from '../../types/common';
+import { Box, Button, Typography } from '@mui/material';
+import * as S from './LoadCurrencies.style';
 
 const LoadCurrencies = () => {
   const [selectedOption, setSelectedOption] = useState<IOption | null>(null);
@@ -13,11 +15,11 @@ const LoadCurrencies = () => {
   const spinner = isLoading ? <Spinner /> : null;
 
   const exchangeRates = Object.keys(rates || {}).map((key) => (
-    <div key={key}>
-      <p>
-        1 {key} = {(1 / rates[key]).toFixed(2)} {currency.base}
-      </p>
-    </div>
+      <S.CardItem key={key}>
+        <Typography>1 {key}</Typography>
+        <Typography variant="h4"> = </Typography>
+        <Typography>{(1 / rates[key]).toFixed(2)} {currency.base}</Typography>
+      </S.CardItem>
   ));
 
   const handleRefresh = () => {
@@ -43,16 +45,16 @@ const LoadCurrencies = () => {
   }, [selectedOption?.label]);
 
   return (
-    <div>
+    <S.Container>
       {spinner}
       {!isLoading ? (
-        <div>
-          <div>
-            <h2>DATE: {currency.date}</h2>
-          </div>
-          <div>
-            <span>SELECT BASE CURRENCY: </span>
-            <select
+        <S.Container>
+          <Box>
+            <span>Date: {currency.date}</span>
+          </Box>
+          <S.BaseCurrencyContainer>
+            <S.Text>Base currency: </S.Text>
+            <S.HalfItemSelect
               value={selectedOption?.value || ''}
               onChange={handleOptionChange}
             >
@@ -61,13 +63,15 @@ const LoadCurrencies = () => {
                   {option.label}
                 </option>
               ))}
-            </select>
-          </div>
-          <div>{exchangeRates}</div>
-          <button onClick={handleRefresh}>REFRESH EXCHANGE RATES</button>
-        </div>
+            </S.HalfItemSelect>
+          </S.BaseCurrencyContainer>
+          <S.RatesCardsContainer>{exchangeRates}</S.RatesCardsContainer>
+          <Button variant="contained" sx={{ width: '280px' }} onClick={handleRefresh}>
+            REFRESH RATES
+          </Button>
+        </S.Container>
       ) : null}
-    </div>
+    </S.Container>
   );
 };
 

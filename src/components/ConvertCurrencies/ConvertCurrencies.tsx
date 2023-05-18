@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
-import { $convert, fetchСonvertCurrenciesFx } from '../services/api';
-import { IOption, options, IConvert } from '../types/common';
-import Spinner from '../assets/Spinner/spinner';
+import { $convert, fetchСonvertCurrenciesFx } from '../../services/api';
+import { IOption, options, IConvert } from '../../types/common';
+import Spinner from '../../assets/Spinner/spinner';
 
 const ConvertCurrencies = () => {
-  const [selectedOptionFrom, setSelectedOptionFrom] = useState<IOption | null>(
-    {value: 'option5', label: 'USD'}
-  );
-  const [selectedOptionTo, setSelectedOptionTo] = useState<IOption | null>(
-    {value: 'option1', label: 'RUB'}
-  );
+  const [selectedOptionFrom, setSelectedOptionFrom] = useState<IOption | null>({
+    value: 'option5',
+    label: 'USD',
+  });
+  const [selectedOptionTo, setSelectedOptionTo] = useState<IOption | null>({
+    value: 'option1',
+    label: 'RUB',
+  });
   const [inputValue, setInputValue] = useState('1');
   const [isValid, setIsValid] = useState(true);
 
@@ -59,7 +61,11 @@ const ConvertCurrencies = () => {
   };
 
   useEffect(() => {
-    fetchСonvertCurrenciesFx({ CUR_FROM: 'USD', CUR_TO: 'RUB', CUR_AMOUNT: '1' });
+    fetchСonvertCurrenciesFx({
+      CUR_FROM: 'USD',
+      CUR_TO: 'RUB',
+      CUR_AMOUNT: '1',
+    });
   }, []);
 
   return (
@@ -103,7 +109,11 @@ const ConvertCurrencies = () => {
                 value={inputValue}
                 onChange={handleInputChange}
               />
-              {!isValid && <span style={{ color: 'red' }}>Enter only numbers, please!</span>}
+              {!isValid && (
+                <span style={{ color: 'red' }}>
+                  Enter only numbers, please!
+                </span>
+              )}
             </div>
             <button type="submit">SUBMIT</button>
           </form>
