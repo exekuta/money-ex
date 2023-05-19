@@ -53,6 +53,7 @@
 2. Установите зависимости
 
    ```sh
+   cd money-ex
    yarn install
    ```
 

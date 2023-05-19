@@ -1,6 +1,5 @@
 import { ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import * as S from './LangToggler.style';
 
 const LanguageToggler = () => {
   const { i18n, t } = useTranslation();

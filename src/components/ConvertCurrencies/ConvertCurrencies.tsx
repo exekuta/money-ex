@@ -11,12 +11,10 @@ const ConvertCurrencies = () => {
   const [selectedOptionFrom, setSelectedOptionFrom] = useState<IOption | null>({
     value: 'option5',
     label: 'USD',
-    fullname: '(Российский Рубль)',
   });
   const [selectedOptionTo, setSelectedOptionTo] = useState<IOption | null>({
     value: 'option1',
     label: 'RUB',
-    fullname: '(Российский Рубль)',
   });
   const [inputValue, setInputValue] = useState('1');
   const [isValid, setIsValid] = useState(true);
@@ -90,13 +88,17 @@ const ConvertCurrencies = () => {
                   >
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label} {t('Option.'+option.label)}
+                        {option.label} {t('Option.' + option.label)}
                       </option>
                     ))}
                   </S.HalfItemSelect>
                 </div>
               </S.FlexStart>
-              <Button sx={{ fontSize: '30px' }} variant="contained" onClick={handleSwapClick}>
+              <Button
+                sx={{ fontSize: '30px' }}
+                variant="contained"
+                onClick={handleSwapClick}
+              >
                 &#8646;
               </Button>
               <S.FlexStart>
@@ -108,7 +110,7 @@ const ConvertCurrencies = () => {
                   >
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label} {t('Option.'+option.label)}
+                        {option.label} {t('Option.' + option.label)}
                       </option>
                     ))}
                   </S.HalfItemSelect>
@@ -126,9 +128,7 @@ const ConvertCurrencies = () => {
                   />
                 </div>
                 {!isValid && (
-                  <S.ErrorText>
-                    {t('Convert.AmountError')}
-                  </S.ErrorText>
+                  <S.ErrorText>{t('Convert.AmountError')}</S.ErrorText>
                 )}
               </S.FlexStart>
               <S.FlexStart>
