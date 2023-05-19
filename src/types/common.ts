@@ -47,12 +47,3 @@ export const options: IOption[] = [
   { value: 'option5', label: 'USD', fullname: '(Доллар США)' },
   { value: 'option6', label: 'GBP', fullname: '(Фунт стерлингов)' },
 ];
-
-// export const options: IOption[] = [
-//   { value: 'option1', label: 'RUB (Российский Рубль)' },
-//   { value: 'option2', label: 'AED (Дирхам ОАЭ)' },
-//   { value: 'option3', label: 'CNY (Китайский юань)' },
-//   { value: 'option4', label: 'EUR (Евро)' },
-//   { value: 'option5', label: 'USD (Доллар США)' },
-//   { value: 'option6', label: 'GBP (Фунт стерлингов)' },
-// ];

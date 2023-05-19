@@ -27,10 +27,10 @@ export const $fetchError = restore<Error>(fetchCurrenciesFx.failData, null);
 export const $currency = createStore<ICurrency[]>([]).on(fetchCurrenciesFx.doneData, (_, currency) => currency);
 export const $convert = createStore<IConvert[]>([]).on(fetchСonvertCurrenciesFx.doneData, (_, currency) => currency);
 
-fetchCurrenciesFx.done.watch(({ params, result }) => {
-  console.log(result);
-});
+// fetchCurrenciesFx.done.watch(({ params, result }) => {
+//   console.log(result);
+// });
 
-fetchСonvertCurrenciesFx.done.watch(({ params, result }) => {
-  console.log(result);
-});
+// fetchСonvertCurrenciesFx.done.watch(({ params, result }) => {
+//   console.log(result);
+// });

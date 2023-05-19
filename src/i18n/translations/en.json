@@ -1,0 +1,34 @@
+{
+  "lng": "English",
+  "Header": {
+    "Main": "Main",
+    "Convert": "Convert",
+    "LanguageEn": "EN",
+    "LanguageRu": "RU"
+  },
+  "Main": {
+    "Exchange": "Exchange Rates:"
+  },
+  "Load": {
+    "Date": "Date:",
+    "Base": "Base currency:",
+    "RefreshBtn": "REFRESH RATES"
+  },
+  "Convert": {
+    "Title": "Convert your currency:",
+    "From": "FROM:",
+    "To": "TO:",
+    "Amount": "AMOUNT:",
+    "AmountError": "You can enter only numbers and dot sign!",
+    "Result": "RESULT:",
+    "SubmitBtn": "SUBMIT"
+  },
+  "Option": {
+    "RUB": "(Russian ruble)",
+    "AED": "(UAE dirham)",
+    "CNY": "(Chinese Yuan)",
+    "EUR": "(Euro)",
+    "USD": "(USA Dollar)",
+    "GBP": "(Pound sterling)"
+  }
+}

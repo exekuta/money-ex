@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useStore } from 'effector-react';
+import { Button } from '@mui/material';
 import { $convert, fetchСonvertCurrenciesFx } from '../../services/api';
 import { IOption, options, IConvert } from '../../types/common';
+import { useTranslation } from 'react-i18next';
 import Spinner from '../../assets/Spinner/spinner';
 import * as S from './ConvertCurrencies.style';
-import { Button } from '@mui/material';
 
 const ConvertCurrencies = () => {
   const [selectedOptionFrom, setSelectedOptionFrom] = useState<IOption | null>({
@@ -23,6 +24,7 @@ const ConvertCurrencies = () => {
   const convert = useStore($convert) as IConvert;
   const isLoading = useStore(fetchСonvertCurrenciesFx.pending);
   const spinner = isLoading ? <Spinner /> : null;
+  const { t } = useTranslation();
 
   const handleOptionChangeFrom = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -80,7 +82,7 @@ const ConvertCurrencies = () => {
           <form onSubmit={handleSubmit}>
             <S.ContainerRow>
               <S.FlexStart>
-                <S.BoldText>FROM: </S.BoldText>
+                <S.BoldText>{t('Convert.From')} </S.BoldText>
                 <div>
                   <S.HalfItemSelect
                     value={selectedOptionFrom?.value || ''}
@@ -88,17 +90,17 @@ const ConvertCurrencies = () => {
                   >
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label} {option.fullname}
+                        {option.label} {t('Option.'+option.label)}
                       </option>
                     ))}
                   </S.HalfItemSelect>
                 </div>
               </S.FlexStart>
-              <Button variant="contained" onClick={handleSwapClick}>
+              <Button sx={{ fontSize: '30px' }} variant="contained" onClick={handleSwapClick}>
                 &#8646;
               </Button>
               <S.FlexStart>
-                <S.BoldText>TO: </S.BoldText>
+                <S.BoldText>{t('Convert.To')} </S.BoldText>
                 <div>
                   <S.HalfItemSelect
                     value={selectedOptionTo?.value || ''}
@@ -106,7 +108,7 @@ const ConvertCurrencies = () => {
                   >
                     {options.map((option) => (
                       <option key={option.value} value={option.value}>
-                        {option.label} {option.fullname}
+                        {option.label} {t('Option.'+option.label)}
                       </option>
                     ))}
                   </S.HalfItemSelect>
@@ -115,7 +117,7 @@ const ConvertCurrencies = () => {
             </S.ContainerRow>
             <S.ContainerRow>
               <S.FlexStart>
-                <S.BoldText>AMOUNT: </S.BoldText>
+                <S.BoldText>{t('Convert.Amount')} </S.BoldText>
                 <div>
                   <S.HalfItemInput
                     type="text"
@@ -125,18 +127,18 @@ const ConvertCurrencies = () => {
                 </div>
                 {!isValid && (
                   <S.ErrorText>
-                    You can enter only numbers and dot sign!
+                    {t('Convert.AmountError')}
                   </S.ErrorText>
                 )}
               </S.FlexStart>
               <S.FlexStart>
-                <S.BoldText>RESULT: </S.BoldText>
+                <S.BoldText>{t('Convert.Result')} </S.BoldText>
                 <S.HalfItemInput type="text" value={convert.result} disabled />
               </S.FlexStart>
             </S.ContainerRow>
 
             <Button variant="contained" type="submit" disabled={!isValid}>
-              SUBMIT
+              {t('Convert.SubmitBtn')}
             </Button>
           </form>
         </S.Container>

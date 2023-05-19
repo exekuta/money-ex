@@ -3,6 +3,7 @@ import { useStore } from 'effector-react';
 import { $currency, fetchCurrenciesFx } from '../../services/api'
 import { IOption, options, ICurrency, IRates } from '../../types/common';
 import { Box, Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import Spinner from '../../assets/Spinner/spinner';
 import * as S from './LoadCurrencies.style';
 
@@ -13,9 +14,7 @@ const LoadCurrencies = () => {
   const rates = currency.rates as IRates;
   const isLoading = useStore(fetchCurrenciesFx.pending);
   const spinner = isLoading ? <Spinner /> : null;
-
-  console.log(currency);
-  console.log(rates);
+  const { t } = useTranslation();
 
   const exchangeRates = Object.keys(rates || {}).map((key) => (
       <S.CardItem key={key}>
@@ -53,24 +52,24 @@ const LoadCurrencies = () => {
       {!isLoading ? (
         <S.Container>
           <Box>
-            <span>Date: {currency.date}</span>
+            <span>{t('Load.Date')} {currency.date}</span>
           </Box>
           <S.BaseCurrencyContainer>
-            <S.Text>Base currency: </S.Text>
+            <S.Text>{t('Load.Base')} </S.Text>
             <S.HalfItemSelect
               value={selectedOption?.value || ''}
               onChange={handleOptionChange}
             >
               {options.map((option) => (
                 <option key={option.value} value={option.value}>
-                  {option.label} {option.fullname}
+                  {option.label} {t('Option.'+option.label)}
                 </option>
               ))}
             </S.HalfItemSelect>
           </S.BaseCurrencyContainer>
           <S.RatesCardsContainer>{exchangeRates}</S.RatesCardsContainer>
           <Button variant="contained" sx={{ width: '280px' }} onClick={handleRefresh}>
-            REFRESH RATES
+            {t('Load.RefreshBtn')}
           </Button>
         </S.Container>
       ) : null}
