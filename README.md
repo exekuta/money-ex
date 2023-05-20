@@ -2,24 +2,26 @@
 
 # Money-ex
 
-Приложение для конвертирования валют.
+**Money-ex** - Приложение (онлайн-калькулятор) для конвертирования валют.
+![preview01](./public/money-ex_01.png)
+![preview02](./public/money-ex_02.png)
 
 ## Разработано с использованием:
 
-- [React.js](https://reactjs.org/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Effector](https://effector.dev/)
-- [Material UI](https://mui.com/)
-- [React Router](https://reactrouter.com/en/main)
-- [Styled Components](https://styled-components.com/)
-- [i18next](https://www.i18next.com/)
+![React.js](https://img.shields.io/badge/React-0D1D34?style=for-the-badge&logo=react)
+![Typescript](https://img.shields.io/badge/Typescript-0D1D34?style=for-the-badge&logo=Typescript)
+![Effector](https://img.shields.io/badge/Effector-0D1D34?style=for-the-badge&logo=Effector)
+![MaterialUI](https://img.shields.io/badge/MaterialUI-0D1D34?style=for-the-badge&logo=MUI) 
+![React-router](https://img.shields.io/badge/Reactrouter-0D1D34?style=for-the-badge&logo=Reactrouter)
+![Styled Components](https://img.shields.io/badge/StyledComponents-0D1D34?style=for-the-badge&logo=StyledComponents)
+![i18next](https://img.shields.io/badge/i18next-0D1D34?style=for-the-badge&logo=i18next)
 
 - API: [Exchangerate.host](https://exchangerate.host/#/)
 
 ## Дополнительные инструменты:
 
-- [Figma](https://www.figma.com/)
-- [Postman](https://www.postman.com/)
+![Figma](https://img.shields.io/badge/Figma-0D1D34?style=for-the-badge&logo=Figma)
+![Postman](https://img.shields.io/badge/Postman-0D1D34?style=for-the-badge&logo=Postman)
 
 ## Описание страниц:
 ### Главная страница:
